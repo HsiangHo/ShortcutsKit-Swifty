@@ -17,7 +17,7 @@ public class SCHotkey: NSObject {
     public var target: NSObject?
     public var selector: Selector?
     public var hotkeyHandler: HotkeyHandler?
-    public var hotkeyID: UInt?
+    public var hotkeyID: UInt = UInt.max
     public var hotkeyRef: EventHotKeyRef?
 
     public init(keyCombo: SCKeyCombo, identifier: String, target: NSObject, selector: Selector) {

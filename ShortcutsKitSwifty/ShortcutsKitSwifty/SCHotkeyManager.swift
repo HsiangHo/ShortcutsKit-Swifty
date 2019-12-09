@@ -32,10 +32,11 @@ public class SCHotkeyManager: NSObject {
             return rslt
         }
 
+        hotkey.hotkeyID = nIndex
+        nIndex += 1
         hotkey.hotkeyRef = hotKeyRef
         hotkeyIdentifierMap[hotkey.identifier] = hotkey
-        hotkeyIndexMap[String(format: "%lu", UInt(hotkey.hotkeyID ?? 0))] = hotkey
-        nIndex += 1
+        hotkeyIndexMap[String(format: "%lu", hotkey.hotkeyID)] = hotkey
         rslt = true
         return rslt
     }
@@ -55,7 +56,7 @@ public class SCHotkeyManager: NSObject {
         }
         UnregisterEventHotKey(hotkey!.hotkeyRef)
         hotkeyIdentifierMap[hotkey!.identifier] = nil
-        hotkeyIndexMap[String(format: "%lu", UInt(hotkey!.hotkeyID ?? 0))] = nil
+        hotkeyIndexMap[String(format: "%lu", hotkey!.hotkeyID)] = nil
     }
 
     public func unregisterAllHotkeys() {
