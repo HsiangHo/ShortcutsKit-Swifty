@@ -23,20 +23,20 @@ public class SCKeyCombo: NSObject, NSCoding {
         return rslt
     }
 
-    init(keyCode: UInt32, keyModifiers: UInt32) {
-        self.keyCode = keyCode
-        self.keyModifiers = keyModifiers
+    public init(keyCode: Int, keyModifiers: Int) {
+        self.keyCode = UInt32(keyCode)
+        self.keyModifiers = UInt32(keyModifiers)
         super.init()
     }
 
     public required init?(coder: NSCoder) {
-        keyCode = UInt32(coder.decodeInt32(forKey: "keyCode"))
-        keyModifiers = UInt32(coder.decodeInt32(forKey: "keyModifiers"))
+        keyCode = (coder.decodeObject(forKey: "keyCode") as! NSNumber).uint32Value
+        keyModifiers = (coder.decodeObject(forKey: "keyModifiers") as! NSNumber).uint32Value
     }
 
     public func encode(with coder: NSCoder) {
-        coder.encode(keyCode, forKey: "keyCode")
-        coder.encode(keyModifiers, forKey: "keyModifiers")
+        coder.encode(NSNumber.init(value: keyCode), forKey: "keyCode")
+        coder.encode(NSNumber.init(value: keyModifiers), forKey: "keyModifiers")
     }
 
     public override func isEqual(_ object: Any?) -> Bool {
@@ -108,13 +108,8 @@ extension SCKeyCombo {
             return rslt
         }
 
-        var currentKeyboard = TISCopyCurrentKeyboardInputSource().takeRetainedValue()
-        var rawLayoutData = TISGetInputSourceProperty(currentKeyboard, kTISPropertyUnicodeKeyLayoutData)
-
-        if nil != rawLayoutData {
-            currentKeyboard = TISCopyCurrentASCIICapableKeyboardLayoutInputSource().takeUnretainedValue()
-            rawLayoutData = TISGetInputSourceProperty(currentKeyboard, kTISPropertyUnicodeKeyLayoutData)
-        }
+        let currentKeyboard =  TISCopyCurrentASCIICapableKeyboardLayoutInputSource().takeUnretainedValue()
+        let rawLayoutData = TISGetInputSourceProperty(currentKeyboard, kTISPropertyUnicodeKeyLayoutData)
 
         let layoutData = unsafeBitCast(rawLayoutData, to: CFData.self)
         let layout: UnsafePointer<UCKeyboardLayout> = unsafeBitCast(CFDataGetBytePtr(layoutData), to: UnsafePointer<UCKeyboardLayout>.self)

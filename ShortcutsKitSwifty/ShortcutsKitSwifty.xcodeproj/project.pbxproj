@@ -14,6 +14,7 @@
 		98E55432239CDE56002599B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E55431239CDE56002599B4 /* AppDelegate.swift */; };
 		98E55434239CDE5A002599B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98E55433239CDE5A002599B4 /* Assets.xcassets */; };
 		98E55437239CDE5A002599B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98E55435239CDE5A002599B4 /* MainMenu.xib */; };
+		98E5543E239D53C5002599B4 /* SCKeyComboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5543D239D53C5002599B4 /* SCKeyComboView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		98E55436239CDE5A002599B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		98E55438239CDE5A002599B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98E55439239CDE5A002599B4 /* ShortcutsKitSwiftyDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShortcutsKitSwiftyDemo.entitlements; sourceTree = "<group>"; };
+		98E5543D239D53C5002599B4 /* SCKeyComboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCKeyComboView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				98E553FE239B9D88002599B4 /* SCKeyCombo.swift */,
 				98E553F9239B9C6A002599B4 /* SCHotkey.swift */,
 				98E55429239CC9C7002599B4 /* SCHotkeyManager.swift */,
+				98E5543D239D53C5002599B4 /* SCKeyComboView.swift */,
 			);
 			path = ShortcutsKitSwifty;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98E5542A239CC9C7002599B4 /* SCHotkeyManager.swift in Sources */,
+				98E5543E239D53C5002599B4 /* SCKeyComboView.swift in Sources */,
 				98E553FF239B9D88002599B4 /* SCKeyCombo.swift in Sources */,
 				98E553FA239B9C6A002599B4 /* SCHotkey.swift in Sources */,
 			);
@@ -419,6 +423,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.HyperartFlow.ShortcutsKitSwiftyDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -440,6 +445,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.HyperartFlow.ShortcutsKitSwiftyDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

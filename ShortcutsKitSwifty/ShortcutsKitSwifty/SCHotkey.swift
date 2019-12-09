@@ -20,7 +20,7 @@ public class SCHotkey: NSObject {
     public var hotkeyID: UInt?
     public var hotkeyRef: EventHotKeyRef?
 
-    init(keyCombo: SCKeyCombo, identifier: String, target: NSObject, selector: Selector) {
+    public init(keyCombo: SCKeyCombo, identifier: String, target: NSObject, selector: Selector) {
         super.init()
         self.keyCombo = keyCombo
         self.identifier = identifier
@@ -28,7 +28,7 @@ public class SCHotkey: NSObject {
         self.selector = selector
     }
 
-    init(keyCombo: SCKeyCombo, identifier: String, handler: @escaping HotkeyHandler) {
+    public init(keyCombo: SCKeyCombo, identifier: String, handler: @escaping HotkeyHandler) {
         self.keyCombo = keyCombo
         self.identifier = identifier
         self.hotkeyHandler = handler
@@ -44,7 +44,7 @@ public class SCHotkey: NSObject {
         }
     }
 
-    public func register() -> Bool {
+    @discardableResult public func register() -> Bool {
         return SCHotkeyManager.shared.register(hotkey: self)
     }
 
