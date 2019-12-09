@@ -43,13 +43,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let shortcut2 = SCHotkey.init(keyCombo: keyCombo3, identifier: "shortcut2", target: self, selector: #selector(shortcut2Callback(hotkey:)))
         shortcut2.register()
 
-        shortcut.invoke()
-        shortcut.unregister()
-
-        SCHotkeyManager.shared.register(hotkey: shortcut)
-        SCHotkeyManager.shared.unregister(identifier: "shortcut")
-        SCHotkeyManager.shared.unregister(hotkey: shortcut2)
-        SCHotkeyManager.shared.unregisterAllHotkeys()
+//        shortcut.invoke()
+//        shortcut.unregister()
+//
+//        SCHotkeyManager.shared.register(hotkey: shortcut)
+//        SCHotkeyManager.shared.unregister(identifier: "shortcut")
+//        SCHotkeyManager.shared.unregister(hotkey: shortcut2)
+//        SCHotkeyManager.shared.unregisterAllHotkeys()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
