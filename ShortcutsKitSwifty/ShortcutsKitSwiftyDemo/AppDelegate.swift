@@ -30,7 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         keyComboView.onTintColor = NSColor.red
         keyComboView.delegate = self
-        keyComboView.keyCombo = keyCombo
 
         self.window.contentView?.addSubview(keyComboView)
 
@@ -38,6 +37,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             print("shortcut has been called")
         }
         shortcut.register()
+        
+        keyComboView.hotKey = shortcut
 
         let keyCombo3 = SCKeyCombo.init(keyCode: kVK_ANSI_B, keyModifiers: optionKey + controlKey)
         let shortcut2 = SCHotkey.init(keyCombo: keyCombo3, identifier: "shortcut2", target: self, selector: #selector(shortcut2Callback(hotkey:)))
@@ -64,11 +65,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: SCKeyComboViewDelegate {
     func keyComboWillChange(keyComboView: SCKeyComboView) {
-
+        keyComboView.hotKey?.unregister()
     }
 
     func keyComboDidChange(keyComboView: SCKeyComboView) {
-
+        keyComboView.hotKey?.register()
     }
 }
 

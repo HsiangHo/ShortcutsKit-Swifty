@@ -13,14 +13,14 @@ public typealias HotkeyHandler = ((SCHotkey) -> Void)
 
 public class SCHotkey: NSObject {
     public private(set) var identifier: String!
-    public private(set) var keyCombo: SCKeyCombo!
+    public var keyCombo: SCKeyCombo?
     public var target: NSObject?
     public var selector: Selector?
     public var hotkeyHandler: HotkeyHandler?
     public var hotkeyID: UInt = UInt.max
     public var hotkeyRef: EventHotKeyRef?
 
-    public init(keyCombo: SCKeyCombo, identifier: String, target: NSObject, selector: Selector) {
+    public init(keyCombo: SCKeyCombo? = nil, identifier: String, target: NSObject, selector: Selector) {
         super.init()
         self.keyCombo = keyCombo
         self.identifier = identifier
@@ -28,7 +28,7 @@ public class SCHotkey: NSObject {
         self.selector = selector
     }
 
-    public init(keyCombo: SCKeyCombo, identifier: String, handler: @escaping HotkeyHandler) {
+    public init(keyCombo: SCKeyCombo? = nil, identifier: String, handler: @escaping HotkeyHandler) {
         self.keyCombo = keyCombo
         self.identifier = identifier
         self.hotkeyHandler = handler

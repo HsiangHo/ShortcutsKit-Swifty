@@ -23,11 +23,15 @@ public class SCHotkeyManager: NSObject {
 
     @discardableResult public func register(hotkey: SCHotkey) -> Bool {
         var rslt = false
+        guard let keyCombo = hotkey.keyCombo else {
+            return rslt
+        }
+        
         var hotKeyRef: EventHotKeyRef? = nil
         var hotKeyID = EventHotKeyID()
         hotKeyID.signature = UTGetOSTypeFromString("ShortcutsKit" as CFString)
         hotKeyID.id = UInt32(nIndex)
-        let error = RegisterEventHotKey(hotkey.keyCombo.keyCode, hotkey.keyCombo.keyModifiers, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef)
+        let error = RegisterEventHotKey(keyCombo.keyCode, keyCombo.keyModifiers, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef)
         if 0 != error || nil == hotKeyRef {
             return rslt
         }

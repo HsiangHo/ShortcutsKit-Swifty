@@ -24,7 +24,7 @@ extension SCKeyComboViewDelegate {
 
 public class SCKeyComboView: NSView {
     public weak var delegate: SCKeyComboViewDelegate?
-    public var keyCombo: SCKeyCombo?
+    public var hotKey: SCHotkey?
     public var backgroundColor: NSColor = NSColor.clear
     public var hoveredBackgroundColor: NSColor = NSColor.white
     public var borderColor: NSColor = NSColor.clear
@@ -71,7 +71,7 @@ public class SCKeyComboView: NSView {
     }
 
     public override func mouseEntered(with event: NSEvent) {
-        if nil == keyCombo {
+        if nil == hotKey?.keyCombo {
             isEditing = true
         }
         isHovered = true
@@ -103,16 +103,16 @@ public class SCKeyComboView: NSView {
             if event.modifierFlags.contains(.shift) {
                 modifiers += shiftKey
             }
-            if let combo = keyCombo, event.keyCode == combo.keyCode, modifiers == combo.keyModifiers  {
+            if let combo = hotKey?.keyCombo, event.keyCode == combo.keyCode, modifiers == combo.keyModifiers  {
                 return
             }
 
             delegate?.keyComboWillChange(keyComboView: self)
-            if nil == keyCombo {
-                keyCombo = SCKeyCombo(keyCode: Int(event.keyCode), keyModifiers: modifiers)
+            if nil == hotKey?.keyCombo {
+                hotKey?.keyCombo = SCKeyCombo(keyCode: Int(event.keyCode), keyModifiers: modifiers)
             } else {
-                keyCombo!.keyCode = UInt32(event.keyCode)
-                keyCombo!.keyModifiers = UInt32(modifiers)
+                hotKey!.keyCombo!.keyCode = UInt32(event.keyCode)
+                hotKey!.keyCombo!.keyModifiers = UInt32(modifiers)
             }
             delegate?.keyComboDidChange(keyComboView: self)
             needsDisplay = true
@@ -150,7 +150,7 @@ extension SCKeyComboView {
     }
 
     func drawKeyCombo(_ dirtyRect: NSRect) {
-        guard let combo = keyCombo, let code = SCKeyCombo.keyCode2String(keyCode: combo.keyCode, keyModifiers: 0) else {
+        guard let combo = hotKey?.keyCombo, let code = SCKeyCombo.keyCode2String(keyCode: combo.keyCode, keyModifiers: 0) else {
             return
         }
         let attributedModifier = NSMutableAttributedString(string: "")
@@ -223,7 +223,7 @@ extension SCKeyComboView {
 extension SCKeyComboView {
     @IBAction func clearButton_click(sender: Any?) {
         delegate?.keyComboWillChange(keyComboView: self)
-        keyCombo = nil
+        hotKey?.keyCombo = nil
         isEditing = true
         self.needsDisplay = true
         delegate?.keyComboDidChange(keyComboView: self)
